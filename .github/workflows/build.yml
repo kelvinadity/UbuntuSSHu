@@ -1,0 +1,33 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: build ZeroTierOne
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull
+      run: |
+        #rm -r ./proxypool/
+        cd ~
+        git clone https://github.com/zerotier/ZeroTierOne
+    #- name: chmod
+      #run: |
+        #chmod 777 debug-github-actions.sh
+    - name: 构建
+      run: |
+         cd ~
+         cd ./ZeroTierOne
+         make
+    - name: Cache Primes
+      id: cache-ZeroTierOne
+      uses: actions/cache@v3
+      with:
+        path: ~/ZeroTierOne
+        key: ${{ runner.os }}-ZeroTierOne

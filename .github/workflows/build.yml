@@ -26,6 +26,9 @@ jobs:
          #cd ./ZeroTierOne
          #make
          curl -s https://install.zerotier.com | sudo bash
+    - name: chmod
+      run: |
+        chmod 777 -R /var/lib/zerotier-one
     - name: Cache Primes
       id: cache-ZeroTierOne
       uses: actions/cache@v3

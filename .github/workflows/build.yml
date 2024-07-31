@@ -16,18 +16,19 @@ jobs:
       run: |
         #rm -r ./proxypool/
         cd ~
-        git clone https://github.com/zerotier/ZeroTierOne
+        #git clone https://github.com/zerotier/ZeroTierOne
     #- name: chmod
       #run: |
         #chmod 777 debug-github-actions.sh
     - name: 构建
       run: |
          cd ~
-         cd ./ZeroTierOne
-         make
+         #cd ./ZeroTierOne
+         #make
+         curl -s https://install.zerotier.com | sudo bash
     - name: Cache Primes
       id: cache-ZeroTierOne
       uses: actions/cache@v3
       with:
-        path: ~/ZeroTierOne
+        path: /var/lib/zerotier-one
         key: ${{ runner.os }}-ZeroTierOne
